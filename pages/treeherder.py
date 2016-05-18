@@ -23,7 +23,7 @@ class TreeherderPage(Base):
     _unchecked_repos_links_locator = (By.CSS_SELECTOR, '#repoLabel + .dropdown-menu .dropdown-checkbox:not([checked]) + .dropdown-link')
     _unclassified_failure_count_locator = (By.ID, 'unclassified-failure-count')
     _action_menu_dropdown_locator = (By.CSS_SELECTOR, ".th-view-content > ng-view:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(3) > th-action-button:nth-child(4) > span:nth-child(1) > button:nth-child(1)")
-    _top_of_range_link_locator =  (By.CSS_SELECTOR,".th-view-content > ng-view:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(3) > th-action-button:nth-child(4) > span:nth-child(1) > ul:nth-child(2) > li:nth-child(7) > a:nth-child(1)")
+    _top_of_range_link_locator = (By.CSS_SELECTOR, ".th-view-content > ng-view:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(3) > th-action-button:nth-child(4) > span:nth-child(1) > ul:nth-child(2) > li:nth-child(7) > a:nth-child(1)")
     _bottom_of_range_link_locator = (By.CSS_SELECTOR, ".th-view-content > ng-view:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(3) > th-action-button:nth-child(4) > span:nth-child(1) > ul:nth-child(2) > li:nth-child(8) > a:nth-child(1)")
 
     def wait_for_page_to_load(self):
