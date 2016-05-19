@@ -22,22 +22,11 @@ class TreeherderPage(Base):
     _result_sets_locator = (By.CSS_SELECTOR, '.result-set:not(.row)')
     _unchecked_repos_links_locator = (By.CSS_SELECTOR, '#repoLabel + .dropdown-menu .dropdown-checkbox:not([checked]) + .dropdown-link')
     _unclassified_failure_count_locator = (By.ID, 'unclassified-failure-count')
-    _action_menu_dropdown_locator = (By.CSS_SELECTOR, ".th-view-content > ng-view:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(3) > th-action-button:nth-child(4) > span:nth-child(1) > button:nth-child(1)")
-    _top_of_range_link_locator = (By.CSS_SELECTOR, ".th-view-content > ng-view:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(3) > th-action-button:nth-child(4) > span:nth-child(1) > ul:nth-child(2) > li:nth-child(7) > a:nth-child(1)")
-    _bottom_of_range_link_locator = (By.CSS_SELECTOR, ".th-view-content > ng-view:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(3) > th-action-button:nth-child(4) > span:nth-child(1) > ul:nth-child(2) > li:nth-child(8) > a:nth-child(1)")
 
     def wait_for_page_to_load(self):
         Wait(self.selenium, self.timeout).until(
             lambda s: self.unclassified_failure_count > 0)
         return self
-
-    def set_resultset_as_top_of_range(self):
-        self.selenium.find_element(*self._action_menu_dropdown_locator).click()
-        self.selenium.find_element(*self._top_of_range_link_locator).click()
-
-    def set_resultset_as_bottom_of_range(self):
-        self.selenium.find_element(*self._action_menu_dropdown_locator).click()
-        self.selenium.find_element(*self._bottom_of_range_link_locator).click()
 
     @property
     def active_watched_repo(self):
@@ -104,6 +93,9 @@ class TreeherderPage(Base):
         _datestamp_locator = (By.CSS_SELECTOR, '.result-set-title-left > span a')
         _jobs_locator = (By.CLASS_NAME, 'job-btn')
         _pin_all_jobs_locator = (By.CLASS_NAME, 'pin-all-jobs-btn')
+        _dropdown_toggle_locator = (By.CSS_SELECTOR, 'button.btn.btn-sm.btn-resultset.dropdown-toggle')
+        _top_of_range_link_locator = (By.LINK_TEXT, 'Set as top of range')
+        _bottom_of_range_link_locator = (By.LINK_TEXT, 'Set as bottom of range')
 
         @property
         def datestamp(self):
@@ -118,6 +110,14 @@ class TreeherderPage(Base):
 
         def view(self):
             return self.find_element(self._datestamp_locator).click()
+
+        def set_resultset_as_top_of_range(self):
+            self.selenium.find_element(*self._dropdown_toggle_locator).click()
+            self.selenium.find_element(*self._top_of_range_link_locator).click()
+
+        def set_resultset_as_bottom_of_range(self):
+            self.selenium.find_element(*self._dropdown_toggle_locator).click()
+            self.selenium.find_element(*self._bottom_of_range_link_locator).click()
 
         class Job(PageRegion):
 
